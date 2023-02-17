@@ -1,0 +1,19 @@
+server:
+  port: 4001
+spring:
+  application:
+    name: erp-base
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS-HOST:erp-register}:${NACOS-PORT:30000}
+        namespace: @nacos.namespace@
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        shared-dataids: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        namespace: @nacos.namespace@
+  autoconfigure:
+    exclude: org.springframework.cloud.gateway.config.GatewayAutoConfiguration,org.springframework.cloud.gateway.config.GatewayClassPathWarningAutoConfiguration
+  profiles:
+    active: @profiles.active@

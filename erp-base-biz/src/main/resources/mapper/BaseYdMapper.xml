@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BaseYdMapper">
+
+    <resultMap id="baseYdMap" type="com.taiji.erp.base.api.entity.BaseYd">
+        <id property="id" column="id"/>
+        <result property="areaId" column="area_id"/>
+        <result property="bigareaId" column="bigarea_id"/>
+        <result property="priority" column="priority"/>
+        <result property="ydDesc" column="yd_desc"/>
+        <result property="linkPerson" column="link_person"/>
+        <result property="linkPhone" column="link_phone"/>
+        <result property="linkFax" column="link_fax"/>
+        <result property="linkEmail" column="link_email"/>
+        <result property="stockDayCount" column="stock_day_count"/>
+        <result property="warehouseType" column="warehouse_type"/>
+        <result property="warehouseMax" column="warehouse_max"/>
+        <result property="warehousePeople" column="warehouse_people"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="state" column="state"/>
+        <result property="createDate" column="create_date"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateUserId" column="update_user_id"/>
+    </resultMap>
+
+    <update id="updatePriority">
+        update base_yd
+        <choose>
+            <when test="source==null">
+                set priority=priority+1 where priority>=${target}
+            </when>
+            <when test="target==null">
+                set priority=priority-1 where priority>${source}
+            </when>
+            <otherwise>
+                set priority=priority-1 where priority>${source} and priority <![CDATA[<=]]> #{target}
+            </otherwise>
+        </choose>
+    </update>
+</mapper>

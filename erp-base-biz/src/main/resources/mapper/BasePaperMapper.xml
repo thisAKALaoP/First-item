@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BasePaperMapper">
+
+    <resultMap id="basePaperMap" type="com.taiji.erp.base.api.entity.BasePaper">
+        <id property="id" column="id"/>
+        <result property="paperName" column="paper_name"/>
+        <result property="paperCode" column="paper_code"/>
+        <result property="paperWeight" column="paper_weight"/>
+        <result property="paperSize" column="paper_size"/>
+        <result property="paperBrand" column="paper_brand"/>
+        <result property="paperOrigin" column="paper_origin"/>
+        <result property="produceArea" column="produce_area"/>
+        <result property="paperLevel" column="paper_level"/>
+        <result property="priority" column="priority"/>
+        <result property="state" column="state"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createDate" column="create_date"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateUserId" column="update_user_id"/>
+    </resultMap>
+
+
+    <update id="updatePriority">
+        update base_paper
+        <choose>
+            <when test="source ==null">
+                set priority=priority+1 where priority>=${target}
+            </when>
+            <when test="target==null">
+                set priority=priority-1 where priority>${source}
+            </when>
+            <otherwise>
+                set priority=priority-1 where priority>${source} and priority <![CDATA[<=]]> #{target}
+            </otherwise>
+        </choose>
+    </update>
+</mapper>

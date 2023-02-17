@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BaseAreaMapper">
+
+    <resultMap id="baseAreaMap" type="com.taiji.erp.base.api.entity.BaseArea">
+        <id property="id" column="id"/>
+        <result property="areaName" column="area_name"/>
+        <result property="areaAbbr" column="area_abbr"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="priority" column="priority"/>
+        <result property="state" column="state"/>
+        <result property="deleteFlag" column="delete_flag"/>
+    </resultMap>
+
+    <update id="updatePriority" parameterType="integer">
+        update base_area
+        <choose>
+            <when test="source ==null">
+                set priority=priority+1 where priority>=${target}
+            </when>
+            <when test="target==null">
+                set priority=priority-1 where priority>${source}
+            </when>
+            <otherwise>
+                set priority=priority-1 where priority>${source} and priority <![CDATA[<=]]> #{target}
+            </otherwise>
+        </choose>
+    </update>
+
+
+    <select id="getDetailById" resultType="com.taiji.erp.base.api.vo.BaseAreaVo">
+        select rb.id as id,rb.area_name as areaName,rb.parent_id as parentId,lb.area_name as parentName,rb.priority as priority,rb.state as state
+        from base_area rb
+        left join base_area lb
+        on rb.parent_id=lb.id
+        where rb.id=#{id} and rb.delete_flag=0
+    </select>
+
+    <select id="getChinaProvinceList" resultType="com.taiji.erp.base.api.vo.BaseAreaVo">
+         select rb.id as id,rb.area_name as areaName,rb.parent_id as parentId,lb.area_name as parentName,rb.priority as priority,rb.state as state
+        from base_area rb
+        left join base_area lb
+        on rb.parent_id=lb.id
+        where lb.area_name like '中国'
+    </select>
+</mapper>

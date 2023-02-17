@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BaseCentreMapper">
+
+    <resultMap id="baseCentreMap" type="com.taiji.erp.base.api.entity.BaseCentre">
+        <id property="id" column="id"/>
+        <result property="centreCode" column="centre_code"/>
+        <result property="centreName" column="centre_name"/>
+        <result property="centreType" column="centre_type"/>
+        <result property="centrePrincipal" column="centre_principal"/>
+        <result property="priority" column="priority"/>
+        <result property="state" column="state"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createDate" column="create_date"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateUserId" column="update_user_id"/>
+    </resultMap>
+
+
+    <update id="updatePriority" parameterType="integer">
+        update base_centre
+        <choose>
+            <when test="source==null">
+                set priority=priority+1 where priority>=${target}
+            </when>
+            <when test="target==null">
+                set priority=priority-1 where priority>${source}
+            </when>
+            <otherwise>
+                set priority=priority-1 where priority>${source} and priority <![CDATA[<=]]> #{target}
+            </otherwise>
+        </choose>
+    </update>
+</mapper>

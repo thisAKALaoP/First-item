@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BaseNewspaperOfficeMapper">
+
+  <resultMap id="baseNewspaperOfficeMap" type="com.taiji.erp.base.api.entity.BaseNewspaperOffice">
+                  <id property="id" column="id"/>
+                        <result property="officeCode" column="office_code"/>
+                        <result property="officeName" column="office_name"/>
+                        <result property="officeAddress" column="office_address"/>
+                        <result property="postCode" column="post_code"/>
+                        <result property="linkPhone" column="link_phone"/>
+                        <result property="linkPerson" column="link_person"/>
+                        <result property="deleteFlag" column="delete_flag"/>
+                        <result property="createDate" column="create_date"/>
+                        <result property="createUserId" column="create_user_id"/>
+                        <result property="updateDate" column="update_date"/>
+                        <result property="updateUserId" column="update_user_id"/>
+            </resultMap>
+</mapper>

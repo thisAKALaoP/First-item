@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BasePageCountMapper">
+
+    <resultMap id="basePageCountMap" type="com.taiji.erp.base.api.entity.BasePageCount">
+        <id property="id" column="id"/>
+        <result property="newspaperId" column="newspaper_id"/>
+        <result property="ydId" column="yd_id"/>
+        <result property="weekDay" column="week_day"/>
+        <result property="publishDate" column="publish_date"/>
+        <result property="pageCount" column="page_count"/>
+        <result property="addPage" column="add_page"/>
+        <result property="journalType" column="journal_type"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createDate" column="create_date"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateUserId" column="update_user_id"/>
+    </resultMap>
+
+    <resultMap id="BasePageCountVoMap" type="com.taiji.erp.base.api.vo.BasePageCountVo">
+        <result property="newspaperId" column="newspaper_id"/>
+        <result property="ydId" column="yd_id"/>
+        <result property="weekDay" column="week_day"/>
+        <result property="publishDate" column="publish_date"/>
+        <result property="pageCount" column="page_count"/>
+        <result property="addPage" column="add_page"/>
+        <result property="journalType" column="journal_type"/>
+    </resultMap>
+
+    <select id="aPage" resultType="com.taiji.erp.base.api.vo.BasePageCountVo">
+        select bpc.*,bn.newspaper_name
+        from base_page_count bpc
+        left join base_newspaper bn
+        on bpc.newspaper_id=bn.id
+        where bpc.delete_flag=0
+        <if test="count.newspaper_id!=null">
+            and bpc.newspaper_id=#{count.newspaper_id}
+        </if>
+        <if test="count.journal_type!=null and count.journal_type!=''">
+            and bpc.journal_type=#{count.journal_type}
+        </if>
+    </select>
+</mapper>

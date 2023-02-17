@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>erp-base</artifactId>
+        <groupId>com.taiji</groupId>
+        <version>3.5.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>erp-base-api</artifactId>
+    <dependencies>
+        <!--core 工具类-->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-core</artifactId>
+        </dependency>
+        <!--mybatis plus extension,包含了mybatis plus core-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+        </dependency>
+        <!--sentinel-->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-sentinel</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!--私库提交地址配置-->
+    <distributionManagement>
+        <repository>
+            <id>taiji-nexus-releases</id>
+            <name>taiji-nexus-releases</name>
+            <url>http://172.16.110.28:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
+
+</project>

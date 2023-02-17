@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BaseCtpMapper">
+
+    <resultMap id="baseCtpMap" type="com.taiji.erp.base.api.entity.BaseCtp">
+        <id property="id" column="id"/>
+        <result property="newspaperId" column="newspaper_id"/>
+        <result property="ydId" column="yd_id"/>
+        <result property="publishMonth" column="publish_month"/>
+        <result property="ctp1Price" column="ctp1_price"/>
+        <result property="ctp1Count" column="ctp1_count"/>
+        <result property="ctp2Price" column="ctp2_price"/>
+        <result property="ctp2Count" column="ctp2_count"/>
+        <result property="ctp3Price" column="ctp3_price"/>
+        <result property="ctp3Count" column="ctp3_count"/>
+        <result property="deliveryCount" column="delivery_count"/>
+        <result property="ctpState" column="ctp_state"/>
+        <result property="ctpDesc" column="ctp_desc"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createDate" column="create_date"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateUserId" column="update_user_id"/>
+    </resultMap>
+
+    <resultMap id="baseCtpVoMap" type="com.taiji.erp.base.api.vo.BaseCtpVo">
+        <id property="id" column="id"/>
+        <result property="newspaperId" column="newspaper_id"/>
+        <result property="ydId" column="yd_id"/>
+        <result property="publishMonth" column="publish_month"/>
+        <result property="ctp1Price" column="ctp1_price"/>
+        <result property="ctp1Count" column="ctp1_count"/>
+        <result property="ctp2Price" column="ctp2_price"/>
+        <result property="ctp2Count" column="ctp2_count"/>
+        <result property="ctp3Price" column="ctp3_price"/>
+        <result property="ctp3Count" column="ctp3_count"/>
+        <result property="deliveryCount" column="delivery_count"/>
+        <result property="ctpState" column="ctp_state"/>
+        <result property="ctpDesc" column="ctp_desc"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="newspaperName" column="newspaper_name"/>
+    </resultMap>
+
+    <select id="search" resultType="com.taiji.erp.base.api.vo.BaseCtpVo">
+        select count(1) as total,bc.*,bn.newspaper_name
+        from base_ctp bc
+        left join base_newspaper bn
+        on bc.newspaper_id=bn.id
+        where bc.delete_flag=0
+        <if test="vo.newspaperName!=null and vo.newspaperName!=''">
+            <bind name="newspaperName" value="'%'+vo.newspaperName+'%'"/>
+            and bn.newspaper_name like #{newspaperName}
+        </if>
+        <if test="vo.startMonth!=null and vo.startMonth!=''">
+            and cast(#{vo.startMonth} as UNSIGNED) &lt;= cast(bc.publish_month as unsigned)
+        </if>
+        <if test="vo.endMonth!=null and vo.endMonth !=''">
+            and cast(#{vo.endMonth} as unsigned) >= cast(bc.publish_month as unsigned)
+        </if>
+    </select>
+</mapper>

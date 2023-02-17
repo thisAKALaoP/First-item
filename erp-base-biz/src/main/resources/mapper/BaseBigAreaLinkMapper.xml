@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BaseBigAreaLinkMapper">
+
+    <resultMap id="baseBigAreaLinkMap" type="com.taiji.erp.base.api.entity.BaseBigAreaLink">
+        <id property="id" column="id"/>
+        <result property="areaId" column="area_id"/>
+        <result property="bigareaId" column="bigarea_id"/>
+    </resultMap>
+
+
+    <select id="findAreaList" resultType="com.taiji.erp.base.api.vo.AreaLinkVo" parameterType="integer">
+        select
+            l.area_id as areaId,b.area_name as areaName
+        from
+            base_big_area_link l
+        left join
+            base_area b
+        on
+            l.area_id=b.id
+        where
+            l.bigarea_id=#{id}
+    </select>
+</mapper>

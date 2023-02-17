@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+
+  erp-register:
+
+    image: erp-base
+
+    container_name: erp-base
+
+    build:
+      context: ./
+      dockerfile: ./erp-base-biz/Dockerfile
+
+    restart: always
+
+    volumes:
+      - /etc/hostname:/etc/hostname
+      - /etc/hosts:/etc/hosts
+
+    environment:
+      - TZ=Asia/Shanghai
+
+
+  
+
+  

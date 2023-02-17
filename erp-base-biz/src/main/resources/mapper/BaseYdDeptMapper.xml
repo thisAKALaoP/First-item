@@ -1,0 +1,21 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BaseYdDeptMapper">
+
+  <resultMap id="baseYdDeptMap" type="com.taiji.erp.base.api.entity.BaseYdDept">
+                  <id property="id" column="id"/>
+                        <result property="ydId" column="yd_id"/>
+                        <result property="deptName" column="dept_name"/>
+                        <result property="deptType" column="dept_type"/>
+                        <result property="deptBelong" column="dept_belong"/>
+                        <result property="deleteFlag" column="delete_flag"/>
+                        <result property="createDate" column="create_date"/>
+                        <result property="createUserId" column="create_user_id"/>
+                        <result property="updateDate" column="update_date"/>
+                        <result property="updateUserId" column="update_user_id"/>
+            </resultMap>
+</mapper>

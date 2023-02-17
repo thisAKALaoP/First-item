@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BasePostOfficeAreaLinkMapper">
+
+    <resultMap id="basePostOfficeAreaLinkMap" type="com.taiji.erp.base.api.entity.BasePostOfficeAreaLink">
+        <id property="id" column="id"/>
+        <result property="postOfficeId" column="post_office_id"/>
+        <result property="areaId" column="area_id"/>
+    </resultMap>
+
+    <select id="listAll" resultType="com.taiji.erp.base.api.vo.AreaLinkVo">
+        select
+            ba.id as areaId,ba.area_name as areaName
+        from
+            base_post_office_area_link bp
+        left join
+            base_area ba
+        on
+            bp.area_id=ba.id
+        where
+            bp.post_office_id=#{officeId}
+    </select>
+</mapper>

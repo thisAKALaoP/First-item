@@ -1,0 +1,55 @@
+#配置白名单
+security:
+  oauth2:
+    client:
+      client:
+        client-id: ENC(qEGe29Dz3sTxCTvm4QgPDg==)
+        client-secret: ENC(qEGe29Dz3sTxCTvm4QgPDg==)
+        scope: server
+        ignore-urls:
+          - /druid/**
+          - /actuator/**
+          - /v2/api-docs
+#          - /baseArea/**
+#          - /baseCentre/**
+#          - /baseBigArea/**
+#          - /baseBigAreaLink/**
+
+#跳过空值查询和更新
+mybatis-plus:
+  global-config:
+    db-config:
+      select-strategy: not_empty
+      update-strategy: not_empty
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#配置数据库
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: ${MYSQL-USER:root}
+      password: ${MYSQL-PWD:123456}
+      url: jdbc:mysql://${MYSQL-HOST:erp-mysql}:${MYSQL-PORT:3306}/${MYSQL-DB:erp_base}?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&allowMultiQueries=true&allowPublicKeyRetrieval=true
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 10000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+
+#设置中央各部门的字典项
+erp-base:
+  baseCentre:
+    centreType: centre_type
+    postOfficeType: post_office_type
+    releasePeriodType: release_period
+

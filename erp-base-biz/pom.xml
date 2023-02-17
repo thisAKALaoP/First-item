@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>erp-base</artifactId>
+        <groupId>com.taiji</groupId>
+        <version>3.5.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>erp-base-biz</artifactId>
+    <packaging>jar</packaging>
+    <dependencies>
+        <!--upms api、model 模块-->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-base-api</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+        <!--日志处理-->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-log</artifactId>
+        </dependency>
+        <!--日志处理-->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-data</artifactId>
+        </dependency>
+        <!--swagger-->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-swagger</artifactId>
+        </dependency>
+        <!--文件系统-->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-minio</artifactId>
+        </dependency>
+        <!--注册中心客户端-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!--配置中心客户端-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--spring security 、oauth、jwt依赖-->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-security</artifactId>
+        </dependency>
+        <!--支持动态路由配置 -->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-gateway</artifactId>
+        </dependency>
+        <!--sentinel 依赖-->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-sentinel</artifactId>
+        </dependency>
+        <!--mybatis-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <!-- druid 连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+        <!--数据库-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--web 模块-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--undertow容器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+        <!--配置文件加密-->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>1.16</version>
+        </dependency>
+        <!--全局序列号唯一ID生成-->
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-sequence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.taiji</groupId>
+            <artifactId>erp-common-job</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

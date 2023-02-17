@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BaseNewspaperMapper">
+
+    <resultMap id="baseNewspaperMap" type="com.taiji.erp.base.api.entity.BaseNewspaper">
+        <id property="id" column="id"/>
+        <result property="newspaperCode" column="newspaper_code"/>
+        <result property="newspaperName" column="newspaper_name"/>
+        <result property="newspaperOfficeId" column="newspaper_office_id"/>
+        <result property="releasePeriod" column="release_period"/>
+        <result property="priority" column="priority"/>
+        <result property="state" column="state"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createDate" column="create_date"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateUserId" column="update_user_id"/>
+    </resultMap>
+
+    <update id="updatePriority">
+        update base_newspaper
+        <choose>
+            <when test="source==null">
+                set priority=priority+1 where priority>=${target}
+            </when>
+            <when test="target==null">
+                set priority=priority-1 where priority>${source}
+            </when>
+            <otherwise>
+                set priority=priority-1 where priority>${source} and priority <![CDATA[<=]]> #{target}
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="list" resultType="com.taiji.erp.base.api.vo.BaseNewspaperVo">
+        select
+            bn.id as id,bn.newspaper_code as newspaperCode,bn.newspaper_name as newspaperName,
+            bno.office_name as newspaperOfficeName,bn.release_period as releasePeriod,
+            bn.priority as priority,bn.state as state
+        from base_newspaper bn
+        left join base_newspaper_office bno
+        on bn.newspaper_office_id=bno.id
+        where bn.delete_flag=0
+        <if test="vo.state !=null">
+            and bn.state=#{vo.state}
+        </if>
+        <if test="vo.releasePeriod !=null and vo.releasePeriod != ''">
+            and bn.release_period like #{vo.releasePeriod}
+        </if>
+    </select>
+
+</mapper>

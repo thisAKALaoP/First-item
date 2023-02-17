@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BaseYdVendorMapper">
+
+    <resultMap id="baseYdVendorMap" type="com.taiji.erp.base.api.entity.BaseYdVendor">
+        <id property="id" column="id"/>
+        <result property="ydId" column="yd_id"/>
+        <result property="vendorId" column="vendor_id"/>
+        <result property="transportId" column="transport_id"/>
+        <result property="receiver" column="receiver"/>
+        <result property="linkPhone" column="link_phone"/>
+        <result property="receivePlace" column="receive_place"/>
+        <result property="receiveDesc" column="receive_desc"/>
+        <result property="state" column="state"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createDate" column="create_date"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateUserId" column="update_user_id"/>
+    </resultMap>
+
+
+    <select id="pageBaseYdVendorVo" resultType="com.taiji.erp.base.api.vo.BaseYdVendorVo">
+        select byv.id as id,byv.yd_id as ydId,byv.vendor_id as vendorId,byv.transport_id as transportId,
+                bt.transport_name as transport,byv.receiver as receiver,byv.link_phone as linkPhone,
+                byv.receive_place as receivePlace,byv.receive_desc as receiveDesc,byv.state as state
+        from base_yd_vendor byv
+        left join base_transport bt
+        on byv.transport_id=bt.id
+        where byv.delete_flag=0
+        <if test="vo.ydId!=null">
+            and byv.yd_id=#{vo.ydId}
+        </if>
+    </select>
+</mapper>

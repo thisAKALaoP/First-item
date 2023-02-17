@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taiji.erp.base.mapper.BaseYdLinkPersonMapper">
+
+    <resultMap id="baseYdLinkPersonMap" type="com.taiji.erp.base.api.entity.BaseYdLinkPerson">
+        <id property="id" column="id"/>
+        <result property="ydDeptId" column="yd_dept_id"/>
+        <result property="chargePerson" column="charge_person"/>
+        <result property="telephone" column="telephone"/>
+        <result property="mobile" column="mobile"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="createDate" column="create_date"/>
+        <result property="createUserId" column="create_user_id"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateUserId" column="update_user_id"/>
+    </resultMap>
+
+
+    <select id="findDeptLinkPerson" resultType="com.taiji.erp.base.api.vo.YdLinkPersonVo">
+        select bylp.yd_dept_id as ydDeptId,byd.dept_name as deptName,bylp.charge_person as chargePerson,
+                bylp.telephone as telephone,bylp.mobile as mobile,byd.dept_belong as deptBelong
+        from base_yd_dept byd
+        right join base_yd_link_person bylp
+        on bylp.yd_dept_id=byd.id
+        where byd.yd_id=#{ydId} and byd.delete_flag=1
+    </select>
+</mapper>
